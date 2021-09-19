@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import kotlin.concurrent.fixedRateTimer
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,10 +14,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadUserListFragment() {
-        val userListFragment=UserListFragment.newInstance()
-        val fragmentManager : FragmentManager = supportFragmentManager
-        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container,userListFragment)
+        val userListFragment = UserListFragment.newInstance()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, userListFragment)
         fragmentTransaction.commit()
     }
 }

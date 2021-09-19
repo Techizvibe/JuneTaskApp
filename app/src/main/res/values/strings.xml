@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Task App</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="textview">Text View</string>
+    <string name="details_image">Details Image</string>
+    <string name="image_item">Image Item</string>
+    <string name="user_image">User Image</string>
+    <string name="Users">Users</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
