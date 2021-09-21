@@ -32,7 +32,7 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
         val view = binding.root
 
         initViewModel()
-        setAdapter()
+        initRecyclerView()
 
         return view
     }
@@ -44,12 +44,7 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
         //binding.includeUserList.tv
     }
 
-    private fun showProgressBar() {
-        binding.rvUserList.visibility = View.GONE
-        binding.pbUserList.visibility = View.VISIBLE
-    }
-
-    private fun setAdapter() {
+    private fun initRecyclerView() {
         val recyclerView = binding.rvUserList
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
@@ -74,8 +69,12 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
         viewModel.makeApiCall()
     }
 
-    companion object {
+    private fun showProgressBar() {
+        binding.rvUserList.visibility = View.GONE
+        binding.pbUserList.visibility = View.VISIBLE
+    }
 
+    companion object {
         @JvmStatic
         fun newInstance() =
             UserListFragment()

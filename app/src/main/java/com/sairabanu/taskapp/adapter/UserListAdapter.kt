@@ -12,6 +12,7 @@ import com.sairabanu.taskapp.model.UserModel
 class UserListAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<UserListAdapter.MyViewHolder>() {
     private var items = ArrayList<UserModel>()
+
     fun setUpdatedData(items: ArrayList<UserModel>) {
         this.items = items
         notifyDataSetChanged()
