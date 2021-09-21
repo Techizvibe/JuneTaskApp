@@ -2,13 +2,12 @@ package com.sairabanu.taskapp.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sairabanu.taskapp.R
@@ -17,7 +16,7 @@ import com.sairabanu.taskapp.databinding.FragmentEachUserBinding
 import com.sairabanu.taskapp.model.UserModel
 
 
-class EachUserFragment : Fragment(),EachUserAdapter.OnClickListener {
+class EachUserFragment : Fragment(), EachUserAdapter.OnClickListener {
     private var imgUrl = ""
     private var userName = ""
     private var imageList: List<String> = ArrayList()
@@ -41,7 +40,7 @@ class EachUserFragment : Fragment(),EachUserAdapter.OnClickListener {
         // Inflate the layout for this fragment
         _binding = FragmentEachUserBinding.inflate(inflater, container, false)
         val view = binding.root
-        setEachUsersAdapter(view)
+        setEachUsersAdapter()
         return view
     }
 
@@ -61,18 +60,22 @@ class EachUserFragment : Fragment(),EachUserAdapter.OnClickListener {
             .into(binding.includeEachUser.ivToolbar)
     }
 
-    private fun setEachUsersAdapter(view: View) {
+    private fun setEachUsersAdapter() {
         val recyclerView = binding.rvEachUser
-        recyclerView.layoutManager = GridLayoutManager(activity, 2)
-       /* val decoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        recyclerView.addItemDecoration(decoration)*/
+        val manager = GridLayoutManager(activity, 2)
+        if (imageList.size % 2 != 0) {
+            manager.spanSizeLookup = object : SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == 0) 2 else 1
+                }
+            }
+            recyclerView.layoutManager = manager
+        } else {
+            recyclerView.layoutManager = manager
+        }
 
-        eachUserAdapter = EachUserAdapter(this, imageList)
+        eachUserAdapter = EachUserAdapter(this, imageList,userName)
         recyclerView.adapter = eachUserAdapter
-
-        //get count of items
-        var count= eachUserAdapter.itemCount
-        //Log.d("count",count.toString())
         eachUserAdapter.notifyDataSetChanged()
     }
 
@@ -89,8 +92,11 @@ class EachUserFragment : Fragment(),EachUserAdapter.OnClickListener {
             }
     }
 
-    override fun onItemClick(imageItem: String) {
-        Log.d("info",imageItem)
+    override fun onItemClick(imageItem: String,name : String) {
+        Log.d("info", imageItem)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container,DetailsFragment.newInstance(imageItem,name))
+            .addToBackStack(null).commit()
     }
 
 

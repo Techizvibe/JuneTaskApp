@@ -1,6 +1,5 @@
 package com.sairabanu.taskapp.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sairabanu.taskapp.MainActivity
 import com.sairabanu.taskapp.R
 import com.sairabanu.taskapp.adapter.UserListAdapter
 import com.sairabanu.taskapp.databinding.FragmentUserListBinding
@@ -34,7 +32,7 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
         val view = binding.root
 
         initViewModel()
-        initViewModel(view)
+        setAdapter()
 
         return view
     }
@@ -42,18 +40,16 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.includeUserList.tvToolbar.setText(R.string.Users)
-        showProgressBar(view)
+        showProgressBar()
         //binding.includeUserList.tv
     }
 
-    private fun showProgressBar(view: View) {
+    private fun showProgressBar() {
         binding.rvUserList.visibility = View.GONE
         binding.pbUserList.visibility = View.VISIBLE
     }
 
-    private fun initViewModel(view: View) {
-
-        //val recyclerView = view.findViewById<RecyclerView>(R.id.rv_user_list)
+    private fun setAdapter() {
         val recyclerView = binding.rvUserList
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
@@ -61,8 +57,6 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
 
         userListAdapter = UserListAdapter(this)
         recyclerView.adapter = userListAdapter
-
-
     }
 
     private fun initViewModel() {
