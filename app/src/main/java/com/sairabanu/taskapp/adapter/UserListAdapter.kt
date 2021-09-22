@@ -30,13 +30,8 @@ class UserListAdapter(private val listener: OnItemClickListener) :
                 }
             }
         }
-        /* class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-             private val userName = view.findViewById<TextView>(R.id.tv_user_list)
-             private val userImage = view.findViewById<ImageView>(R.id.iv_user_list)*/
 
         fun bind(data: UserModel) {
-            // userName.text = data.name
-            //binding.tvUserList.text=data.name
             binding.apply {
                 tvUserList.text = data.name
                 val url = data.image
@@ -58,9 +53,6 @@ class UserListAdapter(private val listener: OnItemClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        /* val view =
-             LayoutInflater.from(parent.context).inflate(R.layout.row_user_list, parent, false)
-         return MyViewHolder(view)*/
         val binding = RowUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }

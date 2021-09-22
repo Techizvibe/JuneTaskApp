@@ -30,7 +30,6 @@ class UserListFragment : Fragment(), UserListAdapter.OnItemClickListener {
         //val view = inflater.inflate(R.layout.fragment_user_list, container, false)
         _binding = FragmentUserListBinding.inflate(inflater, container, false)
         val view = binding.root
-
         initViewModel()
         initRecyclerView()
 
