@@ -1,6 +1,7 @@
 # JuneTaskApp
 An app using Kotlin, MVVM, Retrofit, RecyclerView
-*** If image list shows even number of images***
+
+***If image list shows even number of images***
 
 ![Presentation1](https://user-images.githubusercontent.com/68288535/134452582-daeed785-cfbd-43fa-b956-bfac696e94e0.jpg)
 
